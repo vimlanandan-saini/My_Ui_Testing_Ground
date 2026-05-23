@@ -5,7 +5,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -22,7 +21,6 @@ import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat
-import androidx.compose.animation.core.copy
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
@@ -40,18 +38,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalConfiguration
-import com.vimla.myapplication.Screen.CategoriesScreenSkeleton
-import com.vimla.myapplication.Screen.ContactUsScreenSkeleton
-import com.vimla.myapplication.Screen.DodoBirdScreen
-import com.vimla.myapplication.Screen.GSLVRocket
-import com.vimla.myapplication.Screen.ImageCompressor.ReducedImageSized
-import com.vimla.myapplication.Screen.OfflineBanner
-import com.vimla.myapplication.Screen.PromptInformationScreenSkeleton
-import com.vimla.myapplication.Screen.SearchScreenSearchResultsSkeleton
-import com.vimla.myapplication.Screen.SearchScreenSuggestionsSkeleton
-import com.vimla.myapplication.Screen.SubscribedUserScreenSkeleton
-import com.vimla.myapplication.Screen.TransactionScreenSkeleton
+import com.vimla.myapplication.Screen.SpaceMaintenance.Rocket
 import com.vimla.myapplication.ui.theme.GrowthGreenSurfaceVariant
 
 class MainActivity : ComponentActivity() {
@@ -67,7 +54,10 @@ class MainActivity : ComponentActivity() {
                     //FavoritesSkeletonContent(modifier = Modifier.padding(innerPadding))
 
                     //SkeletonHomeContent(innerPadding)
-                    GSLVRocket(innerPadding)
+                    //GSLVRocket(innerPadding)
+
+                    Rocket(innerPadding)
+
 
 //                    // ✅ ADAPTIVE SIZING - Get screen configuration
 //                    val configuration = LocalConfiguration.current
