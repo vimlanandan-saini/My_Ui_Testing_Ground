@@ -16,6 +16,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.vimla.myapplication.ui.theme.MyApplicationTheme
 import android.content.pm.PackageManager
+import android.os.PersistableBundle
+import androidx.activity.viewModels
 import androidx.compose.animation.core.CubicBezierEasing
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.LinearEasing
@@ -38,86 +40,102 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import com.razorpay.PaymentData
 import com.vimla.myapplication.Screen.SpaceMaintenance.Rocket
 import com.vimla.myapplication.ui.theme.GrowthGreenSurfaceVariant
+import com.razorpay.PaymentResultWithDataListener
+import com.vimla.myapplication.RazorpayTesting.ui.screen.PaymentScreen
+import com.vimla.myapplication.RazorpayTesting.ui.viewmodel.PaymentViewModel
 
-class MainActivity : ComponentActivity() {
+class MainActivity : ComponentActivity(), PaymentResultWithDataListener {
+    private val viewModel: PaymentViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            MyApplicationTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    //DodoBirdScreen(modifier = Modifier.padding(innerPadding))
-                    //AppVersion(modifier = Modifier.padding(innerPadding))
-
-                    //FavoritesSkeletonContent(modifier = Modifier.padding(innerPadding))
-
-                    //SkeletonHomeContent(innerPadding)
-                    //GSLVRocket(innerPadding)
-
-                    Rocket(innerPadding)
-
-
-//                    // ✅ ADAPTIVE SIZING - Get screen configuration
-//                    val configuration = LocalConfiguration.current
-//                    val screenHeight = configuration.screenHeightDp.dp
-//                    val screenWidth = configuration.screenWidthDp.dp
-//                    val isSmallScreen = screenHeight < 700.dp
-//                    val isVerySmallScreen = screenHeight < 600.dp
+            PaymentScreen(viewModel)
+//            MyApplicationTheme {
+//                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+//                    //DodoBirdScreen(modifier = Modifier.padding(innerPadding))
+//                    //AppVersion(modifier = Modifier.padding(innerPadding))
+//
+//                    //FavoritesSkeletonContent(modifier = Modifier.padding(innerPadding))
+//
+//                    //SkeletonHomeContent(innerPadding)
+//                    //GSLVRocket(innerPadding)
+//
+//                    Rocket(innerPadding)
 //
 //
-//                    val horizontalPadding = when {
-//                        screenWidth < 360.dp -> 12.dp
-//                        screenWidth < 400.dp -> 14.dp
-//                        else -> 16.dp
-//                    }
+////                    // ✅ ADAPTIVE SIZING - Get screen configuration
+////                    val configuration = LocalConfiguration.current
+////                    val screenHeight = configuration.screenHeightDp.dp
+////                    val screenWidth = configuration.screenWidthDp.dp
+////                    val isSmallScreen = screenHeight < 700.dp
+////                    val isVerySmallScreen = screenHeight < 600.dp
+////
+////
+////                    val horizontalPadding = when {
+////                        screenWidth < 360.dp -> 12.dp
+////                        screenWidth < 400.dp -> 14.dp
+////                        else -> 16.dp
+////                    }
+////
+////                    val verticalPadding = when {
+////                        isVerySmallScreen -> 8.dp
+////                        isSmallScreen -> 10.dp
+////                        else -> 12.dp
+////                    }
+////
+////                    val cardSpacing = when {
+////                        isVerySmallScreen -> 10.dp
+////                        isSmallScreen -> 12.dp
+////                        else -> 16.dp
+////                    }
+////
+////                    ContactUsScreenSkeleton(
+////                        innerPadding = innerPadding,
+////
+////                        horizontalPadding = horizontalPadding,
+////                        verticalPadding = verticalPadding,
+////                        cardSpacing = cardSpacing,
+////                        isSmallScreen = isSmallScreen
+////                    )
 //
-//                    val verticalPadding = when {
-//                        isVerySmallScreen -> 8.dp
-//                        isSmallScreen -> 10.dp
-//                        else -> 12.dp
-//                    }
+//                    //LoadingSuggestionsGrid(modifier = Modifier.padding(innerPadding))
 //
-//                    val cardSpacing = when {
-//                        isVerySmallScreen -> 10.dp
-//                        isSmallScreen -> 12.dp
-//                        else -> 16.dp
-//                    }
+//                    //SearchScreenSuggestionsSkeleton(innerPadding = innerPadding,isSmallScreen = isSmallScreen)
 //
-//                    ContactUsScreenSkeleton(
-//                        innerPadding = innerPadding,
+////                    val configuration = LocalConfiguration.current
+////                    val screenHeight = configuration.screenHeightDp.dp
+////                    val isSmallScreen = screenHeight < 700.dp
+////                    val isVerySmallScreen = screenHeight < 600.dp
+////
+////                    PromptInformationScreenSkeleton(
+////                        innerPadding = innerPadding,
+////                        isSmallScreen = isSmallScreen,
+////                        isVerySmallScreen = isVerySmallScreen
+////                    )
 //
-//                        horizontalPadding = horizontalPadding,
-//                        verticalPadding = verticalPadding,
-//                        cardSpacing = cardSpacing,
-//                        isSmallScreen = isSmallScreen
-//                    )
-
-                    //LoadingSuggestionsGrid(modifier = Modifier.padding(innerPadding))
-
-                    //SearchScreenSuggestionsSkeleton(innerPadding = innerPadding,isSmallScreen = isSmallScreen)
-
-//                    val configuration = LocalConfiguration.current
-//                    val screenHeight = configuration.screenHeightDp.dp
-//                    val isSmallScreen = screenHeight < 700.dp
-//                    val isVerySmallScreen = screenHeight < 600.dp
 //
-//                    PromptInformationScreenSkeleton(
-//                        innerPadding = innerPadding,
-//                        isSmallScreen = isSmallScreen,
-//                        isVerySmallScreen = isVerySmallScreen
-//                    )
-
-
-//                    Box(modifier = Modifier.padding(innerPadding)) {
-//                        ReducedImageSized()
-//                    }
-
-
-                }
-            }
+////                    Box(modifier = Modifier.padding(innerPadding)) {
+////                        ReducedImageSized()
+////                    }
+//
+//
+//                }
+//            }
         }
+    }
+
+    override fun onPaymentSuccess(razorpayPaymentId: String?, paymentData: PaymentData?) {
+        if (razorpayPaymentId != null)
+            viewModel.handlePaymentSuccess(razorpayPaymentId)
+    }
+    override fun onPaymentError(code: Int, response : String?, paymentData: PaymentData?) {
+
+            viewModel.handlePaymentError(code,response?:"Payment failed")
+
     }
 }
 
@@ -502,9 +520,6 @@ fun AppVersion(modifier: Modifier = Modifier) {
         )
     }
 }
-
-
-
 
 
 //import android.os.Bundle

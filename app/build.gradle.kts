@@ -59,4 +59,8 @@ dependencies {
 
     implementation("androidx.compose.material:material-icons-extended:1.6.0")
 
+    // Razorpay
+    implementation("com.razorpay:checkout:1.6.33")
+
+
 }
