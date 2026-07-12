@@ -1,23 +1,10 @@
 package com.vimla.myapplication
 
+import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.*
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import com.vimla.myapplication.ui.theme.MyApplicationTheme
-import android.content.pm.PackageManager
-import android.os.PersistableBundle
-import androidx.activity.viewModels
 import androidx.compose.animation.core.CubicBezierEasing
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.LinearEasing
@@ -27,6 +14,20 @@ import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -35,109 +36,44 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import com.razorpay.PaymentData
-import com.vimla.myapplication.Screen.SpaceMaintenance.Rocket
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.razorpay.Checkout
+import com.vimla.myapplication.Screen.PromotionVideoMakingScreen
 import com.vimla.myapplication.ui.theme.GrowthGreenSurfaceVariant
-import com.razorpay.PaymentResultWithDataListener
-import com.vimla.myapplication.RazorpayTesting.ui.screen.PaymentScreen
-import com.vimla.myapplication.RazorpayTesting.ui.viewmodel.PaymentViewModel
+import com.vimla.myapplication.ui.theme.MyApplicationTheme
 
-class MainActivity : ComponentActivity(), PaymentResultWithDataListener {
-    private val viewModel: PaymentViewModel by viewModels()
+class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        Checkout.preload(applicationContext)
+
         enableEdgeToEdge()
         setContent {
-            PaymentScreen(viewModel)
-//            MyApplicationTheme {
-//                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-//                    //DodoBirdScreen(modifier = Modifier.padding(innerPadding))
-//                    //AppVersion(modifier = Modifier.padding(innerPadding))
-//
-//                    //FavoritesSkeletonContent(modifier = Modifier.padding(innerPadding))
-//
-//                    //SkeletonHomeContent(innerPadding)
-//                    //GSLVRocket(innerPadding)
-//
-//                    Rocket(innerPadding)
-//
-//
-////                    // ✅ ADAPTIVE SIZING - Get screen configuration
-////                    val configuration = LocalConfiguration.current
-////                    val screenHeight = configuration.screenHeightDp.dp
-////                    val screenWidth = configuration.screenWidthDp.dp
-////                    val isSmallScreen = screenHeight < 700.dp
-////                    val isVerySmallScreen = screenHeight < 600.dp
-////
-////
-////                    val horizontalPadding = when {
-////                        screenWidth < 360.dp -> 12.dp
-////                        screenWidth < 400.dp -> 14.dp
-////                        else -> 16.dp
-////                    }
-////
-////                    val verticalPadding = when {
-////                        isVerySmallScreen -> 8.dp
-////                        isSmallScreen -> 10.dp
-////                        else -> 12.dp
-////                    }
-////
-////                    val cardSpacing = when {
-////                        isVerySmallScreen -> 10.dp
-////                        isSmallScreen -> 12.dp
-////                        else -> 16.dp
-////                    }
-////
-////                    ContactUsScreenSkeleton(
-////                        innerPadding = innerPadding,
-////
-////                        horizontalPadding = horizontalPadding,
-////                        verticalPadding = verticalPadding,
-////                        cardSpacing = cardSpacing,
-////                        isSmallScreen = isSmallScreen
-////                    )
-//
-//                    //LoadingSuggestionsGrid(modifier = Modifier.padding(innerPadding))
-//
-//                    //SearchScreenSuggestionsSkeleton(innerPadding = innerPadding,isSmallScreen = isSmallScreen)
-//
-////                    val configuration = LocalConfiguration.current
-////                    val screenHeight = configuration.screenHeightDp.dp
-////                    val isSmallScreen = screenHeight < 700.dp
-////                    val isVerySmallScreen = screenHeight < 600.dp
-////
-////                    PromptInformationScreenSkeleton(
-////                        innerPadding = innerPadding,
-////                        isSmallScreen = isSmallScreen,
-////                        isVerySmallScreen = isVerySmallScreen
-////                    )
-//
-//
-////                    Box(modifier = Modifier.padding(innerPadding)) {
-////                        ReducedImageSized()
-////                    }
-//
-//
-//                }
-//            }
+            MyApplicationTheme {
+                PromotionVideoMakingScreen(
+                    onOrderNowClick = {
+                        // TODO: launch your Razorpay Checkout / order flow here
+                    }
+                )
+            }
         }
     }
-
-    override fun onPaymentSuccess(razorpayPaymentId: String?, paymentData: PaymentData?) {
-        if (razorpayPaymentId != null)
-            viewModel.handlePaymentSuccess(razorpayPaymentId)
-    }
-    override fun onPaymentError(code: Int, response : String?, paymentData: PaymentData?) {
-
-            viewModel.handlePaymentError(code,response?:"Payment failed")
-
-    }
 }
+
 
 @Composable
 private fun LoadingSuggestionsGrid(modifier: Modifier = Modifier) {
