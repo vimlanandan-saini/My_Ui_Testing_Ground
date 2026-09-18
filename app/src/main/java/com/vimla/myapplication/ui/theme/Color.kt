@@ -43,3 +43,39 @@ val Purple40 = Color(0xFF6650a4)
 val PurpleGrey40 = Color(0xFF625b71)
 val Pink40 = Color(0xFF7D5260)
 
+
+// ── Jade Fresh Theme ──────────────────────────────────────
+// A premium mint-jade palette: trustworthy, fresh, and calm.
+// Primary identity: deep jade green + saffron gold accent.
+
+// Primary Colors
+val JadeFreshPrimary          = Color(0xFF2D8563)   // Deeper mint jade — identity color
+val JadeFreshSecondary        = Color(0xFF4FB793)   // Rich aquamint — supporting color
+val JadeFreshTertiary         = Color(0xFF1F6046)   // Deep jade — structure & depth
+
+// Background Colors
+val JadeFreshBackground       = Color(0xFFE0F3EE)   // Minty cool surface — main screen bg
+val JadeFreshSurface          = Color(0xFFFFFFFF)   // Pure white — cards, dialogs
+val JadeFreshSurfaceVariant   = Color(0xFFC6E4D8)   // Deeper mint card — search, chips
+
+// Text Colors
+val JadeFreshOnPrimary        = Color(0xFFFFFFFF)   // On buttons, FAB, nav active
+val JadeFreshOnSecondary      = Color(0xFFFFFFFF)   // On secondary components
+val JadeFreshOnBackground     = Color(0xFF0A211B)   // Jade-black — main body text
+val JadeFreshOnSurface        = Color(0xFF0A211B)   // On white cards
+val JadeFreshOnSurfaceVariant = Color(0xFF295C47)   // On tinted surfaces, hints
+
+// Accent & Special Colors
+val JadeFreshAccent           = Color(0xFFD18627)   // Saffron gold — CTAs, "Add" buttons, offers
+val JadeFreshPremium          = Color(0xFFE27F35)   // Mango orange — premium badges, highlights
+val JadeFreshSuccess          = Color(0xFF2D8563)   // Same as primary — order placed, fresh tag
+val JadeFreshError            = Color(0xFFC43030)   // Deep red — errors, out of stock
+val JadeFreshWarning          = Color(0xFFF1933C)   // Amber — low stock, expiry notices
+
+// Navigation & UI Colors
+val JadeFreshNavActive        = JadeFreshPrimary    // Active bottom bar tab
+val JadeFreshNavInactive      = Color(0xFF8FA59E)   // Inactive tab icons & labels
+val JadeFreshDivider          = Color(0xFFBCD6CD)   // Section dividers, list separators
+val JadeFreshBorder           = Color(0xFFA4C7BB)   // Input field borders, card outlines
+
+

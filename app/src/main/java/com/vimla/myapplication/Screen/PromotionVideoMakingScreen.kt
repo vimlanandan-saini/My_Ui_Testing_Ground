@@ -76,26 +76,32 @@ fun PromotionVideoMakingScreen(
     ) {
         AppHeader()
 
+        // Top-aligned (not centered) so the pager + button sit right under the
+        // header instead of floating in the middle of the screen.
         Column(
             modifier = Modifier
                 .weight(1f)
                 .fillMaxWidth()
-                .padding(24.dp),
-            verticalArrangement = Arrangement.Center
+                .padding(horizontal = 24.dp),
+            verticalArrangement = Arrangement.Top
         ) {
+            Spacer(modifier = Modifier.height(28.dp))
+
             PromoImagePager(
                 images = promoImages,
                 modifier = Modifier.fillMaxWidth()
             )
-        }
 
-        OrderNowButton(
-            onClick = onOrderNowClick,
-            modifier = Modifier
-                .fillMaxWidth()
-                .navigationBarsPadding()
-                .padding(horizontal = 20.dp, vertical = 16.dp)
-        )
+            Spacer(modifier = Modifier.height(28.dp))
+
+            OrderNowButton(
+                onClick = onOrderNowClick,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .navigationBarsPadding()
+                    .padding(bottom = 20.dp)
+            )
+        }
     }
 }
 
@@ -108,21 +114,28 @@ private fun AppHeader() {
                 color = JadeFreshPrimary,
                 shape = RoundedCornerShape(bottomStart = 28.dp, bottomEnd = 28.dp)
             )
+            // Keeps header content clear of the status bar / camera cutout —
+            // background still paints behind them for the edge-to-edge look.
             .statusBarsPadding()
+            .displayCutoutPadding()
             .padding(horizontal = 20.dp, vertical = 20.dp),
+        horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically
     ) {
         Box(
             modifier = Modifier
-                .size(52.dp)
-                .clip(RoundedCornerShape(14.dp))
+                .size(56.dp)
+                .clip(RoundedCornerShape(16.dp))
                 .background(JadeFreshSurface),
             contentAlignment = Alignment.Center
         ) {
             Image(
                 painter = painterResource(id = R.drawable.vindusha),
                 contentDescription = "Vindusha logo",
-                modifier = Modifier.size(34.dp)
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(0.dp),
+                contentScale = ContentScale.Fit
             )
         }
 
@@ -150,7 +163,6 @@ private fun PromoImagePager(
     images: List<Int>,
     modifier: Modifier = Modifier
 ) {
-    // pageCount as a lambda keeps the pager stable if the list ever changes size.
     val pagerState = rememberPagerState(pageCount = { images.size })
 
     // No page indicator by design — swipe only.
